@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三年級班親會簡報</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+    background: #eef5ee;
+    overflow: hidden;
+  }
+  .deck { height: 100vh; position: relative; }
+  .slide {
+    position: absolute; inset: 0;
+    display: none;
+    padding: 7vh 8vw;
+    flex-direction: column;
+    justify-content: center;
+    background: #ffffff;
+    color: #2d3a2d;
+  }
+  .slide.active { display: flex; animation: fade 0.4s ease; }
+  @keyframes fade { from { opacity: 0.2; } to { opacity: 1; } }
+
+  /* 封面 */
+  .cover { background: linear-gradient(160deg, #3a6b47, #5e9b6e); color: #fff; text-align: center; }
+  .cover .school { font-size: 2.2vw; letter-spacing: 0.5em; opacity: 0.9; }
+  .cover h1 { font-size: 6vw; margin: 3vh 0 1vh; letter-spacing: 0.15em; }
+  .cover .grade { font-size: 2.6vw; margin-bottom: 6vh; opacity: 0.95; }
+  .cover .info { font-size: 1.6vw; line-height: 2; opacity: 0.9; }
+
+  /* 標題 */
+  .slide h2 {
+    font-size: 4vw;
+    color: #3a6b47;
+    border-bottom: 0.4vw solid #cfe3d2;
+    padding-bottom: 1.5vh;
+    margin-bottom: 5vh;
+    letter-spacing: 0.1em;
+  }
+  .slide ul { list-style: none; }
+  .slide li {
+    font-size: 2.2vw;
+    line-height: 1.9;
+    padding-left: 3vw;
+    position: relative;
+    margin-bottom: 1.5vh;
+  }
+  .slide li::before { content: "●"; color: #7cb489; position: absolute; left: 0; font-size: 1.6vw; top: 0.6vw; }
+  .slide .sub { color: #6b7a6b; font-size: 1.7vw; padding-left: 3vw; margin-bottom: 2vh; }
+  .slide .blank { color: #94a394; font-style: italic; }
+
+  /* 空白範本 */
+  .template-box {
+    border: 0.25vw dashed #a9c7ae;
+    border-radius: 1.5vw;
+    padding: 4vh 3vw;
+    margin-bottom: 3vh;
+    background: #fafcf8;
+  }
+  .template-box .t-label { color: #3a6b47; font-weight: bold; font-size: 2vw; margin-bottom: 1vh; }
+  .template-box .t-line {
+    height: 3vh;
+    border-bottom: 0.15vw solid #cfded1;
+    margin-bottom: 2vh;
+  }
+
+  /* 結尾 */
+  .end { background: linear-gradient(160deg, #3a6b47, #5e9b6e); color: #fff; text-align: center; }
+  .end h2 { color: #fff; border-color: rgba(255,255,255,0.4); font-size: 4.5vw; }
+  .end p { font-size: 2vw; line-height: 2.2; }
+
+  /* 導航 */
+  .nav {
+    position: fixed; bottom: 3vh; right: 3vw;
+    display: flex; gap: 1vw; z-index: 10;
+  }
+  .nav button {
+    font-size: 1.6vw;
+    padding: 0.8vh 1.4vw;
+    border: none; border-radius: 0.6vw;
+    background: #3a6b47; color: #fff; cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  .nav button:disabled { background: #b9cbbd; cursor: default; }
+  .page-indicator {
+    position: fixed; bottom: 3.5vh; left: 3vw;
+    font-size: 1.4vw; color: #6b7a6b; z-index: 10;
+    background: rgba(255,255,255,0.85);
+    padding: 0.4vh 1vw; border-radius: 1vw;
+  }
+  .hint {
+    position: fixed; bottom: 3vh; left: 50%; transform: translateX(-50%);
+    font-size: 1.2vw; color: #94a394; z-index: 10;
+  }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+  <section class="slide cover active">
+    <div class="school">廍子國民小學</div>
+    <h1>班 親 會</h1>
+    <div class="grade">三年＿＿班　家長座談會</div>
+    <div class="info">導師：＿＿＿＿＿＿　<br>中華民國＿＿＿＿年＿＿月＿＿日</div>
+  </section>
+
+  <section class="slide">
+    <h2>今日議程</h2>
+    <ul>
+      <li>班級經營理念</li>
+      <li>本學期課程重點</li>
+      <li>班級事務說明</li>
+      <li>需要家長配合事項</li>
+      <li>親師交流時間</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>班級經營理念</h2>
+    <ul>
+      <li>培養孩子 自律、負責、尊重他人</li>
+      <li>引導孩子 樂於學習、敢於發問</li>
+      <li>鼓勵孩子 團體合作、互相幫助</li>
+      <li>重視 品格教育，品德優先於成績</li>
+    </ul>
+    <div class="sub blank">（可依各班特色補充）</div>
+  </section>
+
+  <section class="slide">
+    <h2>本學期課程重點</h2>
+    <ul>
+      <li>國語：＿＿＿＿＿＿＿＿＿＿＿＿</li>
+      <li>數學：＿＿＿＿＿＿＿＿＿＿＿＿</li>
+      <li>自然：＿＿＿＿＿＿＿＿＿＿＿＿</li>
+      <li>社會：＿＿＿＿＿＿＿＿＿＿＿＿</li>
+      <li>英語：＿＿＿＿＿＿＿＿＿＿＿＿</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>班級事務說明</h2>
+    <ul>
+      <li>上放學時間：上午＿＿＿　下午＿＿＿</li>
+      <li>午餐：＿＿＿＿＿＿＿＿＿＿＿＿</li>
+      <li>制服／運動服：＿＿＿＿＿＿＿＿</li>
+      <li>聯絡簿與作業：＿＿＿＿＿＿＿＿</li>
+      <li>請假／接送聯繫：＿＿＿＿＿＿＿</li>
+    </ul>
+  </section>
+
+  <section class="slide">
+    <h2>需要家長配合事項</h2>
+    <ul>
+      <li>每日簽閱聯絡簿，陪伴孩子寫作業</li>
+      <li>協助孩子養成閱讀與早睡早起習慣</li>
+      <li>控制 3C 使用時間，以身作則</li>
+      <li>主動與老師保持聯繫、雙向溝通</li>
+    </ul>
+    <div class="sub blank">（可依需求補充）</div>
+  </section>
+
+  <section class="slide">
+    <h2>空白範本 1</h2>
+    <div class="template-box">
+      <div class="t-label">＿＿＿＿＿＿＿＿＿＿</div>
+      <div class="t-line"></div>
+      <div class="t-line"></div>
+      <div class="t-line"></div>
+    </div>
+    <div class="sub blank">（按鍵盤 → 可翻下一頁，本頁可自行修改內容）</div>
+  </section>
+
+  <section class="slide">
+    <h2>空白範本 2</h2>
+    <div class="template-box">
+      <div class="t-label">＿＿＿＿＿＿＿＿＿＿</div>
+      <div class="t-line"></div>
+      <div class="t-line"></div>
+      <div class="t-line"></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>空白範本 3</h2>
+    <div class="template-box">
+      <div class="t-label">＿＿＿＿＿＿＿＿＿＿</div>
+      <div class="t-line"></div>
+      <div class="t-line"></div>
+      <div class="t-line"></div>
+    </div>
+  </section>
+
+  <section class="slide end">
+    <h2>謝謝各位家長的參與</h2>
+    <p>讓我們一起陪伴孩子，快樂學習、健康成長！</p>
+    <p style="margin-top:4vh;">導師聯絡方式<br>電話：＿＿＿＿＿＿＿＿</p>
+  </section>
+
+</div>
+
+<div class="page-indicator" id="pageIndicator">1 / 10</div>
+<div class="hint">← → 方向鍵或點下方按鈕翻頁</div>
+<div class="nav">
+  <button id="prev" disabled>◀ 上一頁</button>
+  <button id="next">下一頁 ▶</button>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let current = 0;
+
+  function show(i) {
+    if (i < 0 || i >= slides.length) return;
+    slides[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    document.getElementById('pageIndicator').textContent = (current + 1) + ' / ' + slides.length;
+    document.getElementById('prev').disabled = current === 0;
+    document.getElementById('next').disabled = current === slides.length - 1;
+  }
+
+  document.getElementById('prev').addEventListener('click', () => show(current - 1));
+  document.getElementById('next').addEventListener('click', () => show(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
+  });
+</script>
+</body>
+</html>
