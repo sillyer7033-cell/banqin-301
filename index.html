@@ -4,11 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>三年一班班親會簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { height: 100%; }
   body {
-    font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+    font-family: "Zen Maru Gothic", "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
     background: #f3efe6;
     overflow: hidden;
   }
@@ -16,7 +19,7 @@
   .slide {
     position: absolute; inset: 0;
     display: none;
-    padding: 7vh 8vw;
+    padding: 6vh 7vw;
     flex-direction: column;
     justify-content: center;
     background: #fbf7ee;
@@ -30,7 +33,11 @@
   /* ===== 封面 ===== */
   .cover { text-align: center; overflow: hidden; }
   .cover .school { font-size: 2vw; letter-spacing: 0.6em; color: #a08c6a; }
-  .cover h1 { font-size: 7vw; letter-spacing: 0.25em; margin: 3vh 0 2vh; font-weight: normal; color: #5a4a3a; }
+  .cover h1 {
+    font-family: "Zen Maru Gothic", "Microsoft JhengHei", sans-serif;
+    font-weight: 700;
+    font-size: 7vw; letter-spacing: 0.2em; margin: 3vh 0 2vh; color: #5a4a3a;
+  }
   .cover .grade { font-size: 2.4vw; letter-spacing: 0.3em; color: #8a7555; margin-bottom: 6vh; }
   .cover .info { font-size: 1.6vw; line-height: 2.2; color: #8a7555; }
   .cover .d-flower { top: -3vw; right: -2vw; width: 16vw; }
@@ -41,25 +48,48 @@
 
   /* ===== 內頁通用 ===== */
   .slide h2 {
-    font-size: 3.2vw;
-    color: #7a6742;
-    border-left: 0.6vw solid #c9b98f;
-    padding-left: 1.2vw;
-    margin-bottom: 5vh;
+    font-family: "Zen Maru Gothic", "Microsoft JhengHei", sans-serif;
+    font-weight: 700;
+    font-size: 3.4vw;
+    color: #fff;
+    background: #c86f85;
+    display: inline-block;
+    padding: 0.8vh 2vw 1.2vh;
+    border-radius: 2vw;
+    margin-bottom: 4.5vh;
     letter-spacing: 0.12em;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.08);
   }
   .slide ul { list-style: none; }
   .slide li {
     font-size: 2vw;
-    line-height: 1.85;
+    line-height: 1.8;
     padding-left: 2.6vw;
     position: relative;
-    margin-bottom: 1.6vh;
+    margin-bottom: 1.4vh;
   }
-  .slide li::before { content: "◆"; color: #b9a87c; position: absolute; left: 0; font-size: 1.1vw; top: 0.9vw; }
+  .slide li::before { content: "◆"; color: #b9a87c; position: absolute; left: 0; font-size: 1.1vw; top: 0.8vw; }
   .slide .sub { color: #8a8a76; font-size: 1.5vw; padding-left: 2.6vw; margin-top: 1vh; }
   .slide .blank { color: #b5ab8e; font-style: italic; }
   .slide .highlight { color: #c86f85; font-weight: bold; }
+
+  /* 字少頁面：大標語置中 */
+  .slide.big { text-align: center; justify-content: center; }
+  .slide.big h2 { margin-bottom: 5vh; }
+  .slide.big ul { display: inline-block; text-align: left; }
+  .slide.big li { font-size: 3vw; line-height: 1.9; margin-bottom: 2vh; padding-left: 3.2vw; }
+  .slide.big li::before { font-size: 1.4vw; top: 1.2vw; }
+  .slide.big .sub { text-align: center; padding-left: 0; font-size: 1.7vw; }
+
+  /* 大詞條（班級經營價值） */
+  .word-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5vw; width: 60%; margin: 0 auto; }
+  .word-grid .word {
+    font-family: "Zen Maru Gothic", "Microsoft JhengHei", sans-serif;
+    font-size: 4.2vw; font-weight: 700; color: #5a4a3a;
+    background: #fff; border: 2px solid #e8dcc8; border-radius: 2vw;
+    padding: 3vh 1vw; text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  }
   .d-corner { bottom: 2vw; right: 2.5vw; width: 8vw; opacity: 0.7; }
   .d-corner-left { bottom: 2vw; left: 2.5vw; width: 7vw; opacity: 0.55; }
   .d-top-right { top: 2vw; right: 2.5vw; width: 6vw; opacity: 0.6; }
@@ -67,22 +97,32 @@
   /* 兩欄（自我介紹） */
   .two-col { display: flex; gap: 4vw; }
   .two-col .col { flex: 1; }
-  .col h3 { font-size: 1.9vw; color: #7a6742; margin-bottom: 2vh; }
+  .col h3 { font-size: 2vw; color: #7a6742; margin-bottom: 2vh; font-weight: 700; }
   .col p { font-size: 1.5vw; line-height: 1.9; color: #5a4a3a; }
 
   /* 行事曆月份 */
   .calendar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1vw; }
   .month { background: #fff; border: 1px solid #e8dcc8; border-radius: 1vw; padding: 1.5vh 1vw; }
-  .month h3 { font-size: 1.6vw; color: #7a6742; text-align: center; border-bottom: 1px dashed #e0d5bd; padding-bottom: 1vh; margin-bottom: 1vh; }
-  .month p { font-size: 1.1vw; line-height: 1.8; color: #6b5c48; }
+  .month h3 { font-size: 1.7vw; color: #7a6742; text-align: center; border-bottom: 1px dashed #e0d5bd; padding-bottom: 1vh; margin-bottom: 1vh; font-weight: 700; }
+  .month p { font-size: 1.2vw; line-height: 1.8; color: #6b5c48; }
   .month .todo { color: #c0b28e; font-style: italic; }
 
   /* 卡牌 */
   .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5vw; }
   .card { background: #fff; border: 1px solid #e8dcc8; border-radius: 1.2vw; padding: 2.5vh 2vw; }
-  .card h3 { font-size: 1.8vw; color: #7a6742; margin-bottom: 1.5vh; }
+  .card h3 { font-size: 2vw; color: #7a6742; margin-bottom: 1.5vh; font-weight: 700; }
   .card p { font-size: 1.4vw; line-height: 1.8; color: #6b5c48; }
   .card .big { font-size: 2.6vw; color: #c86f85; font-weight: bold; }
+
+  /* 常見問題（單卡置中放大） */
+  .slide.qa-card { justify-content: center; }
+  .qa-card .card {
+    width: 80%; margin: 0 auto; text-align: center;
+    padding: 5vh 4vw; border-radius: 2vw;
+    border-width: 2px;
+  }
+  .qa-card .card h3 { font-size: 3vw; color: #c86f85; margin-bottom: 3vh; }
+  .qa-card .card p { font-size: 2vw; line-height: 2.2; }
 
   /* 統計數字 */
   .stat { display: flex; gap: 2vw; margin-top: 1vh; }
@@ -102,14 +142,17 @@
   .template-box .t-line { height: 3vh; border-bottom: 0.15vw solid #e8dcc8; margin-bottom: 2vh; }
 
   /* 大型問號 */
-  .qa { text-align: center; }
-  .qa .q { font-size: 6vw; color: #c9b98f; margin-bottom: 3vh; }
-  .qa p { font-size: 2.4vw; color: #5a4a3a; }
+  .qa { text-align: center; justify-content: center; }
+  .qa .q { font-size: 7vw; color: #c9b98f; margin-bottom: 3vh; }
+  .qa p { font-size: 2.8vw; color: #5a4a3a; font-weight: 700; }
 
   /* 感謝頁 */
   .end { text-align: center; }
-  .end h2 { border: none; font-size: 4.2vw; color: #5a4a3a; }
-  .end p { font-size: 1.9vw; line-height: 2.2; color: #8a7555; }
+  .end h2 {
+    border: none; font-size: 5vw; color: #5a4a3a;
+    background: #f6e3b8;
+  }
+  .end p { font-size: 2.2vw; line-height: 2.2; color: #8a7555; }
   .end .d-heart { top: -2vw; right: -2vw; width: 14vw; opacity: 0.6; }
   .end .d-flower-end { bottom: -3vw; left: -2vw; width: 13vw; }
 
@@ -354,7 +397,7 @@
   </section>
 
   <!-- 4 教育理念 -->
-  <section class="slide">
+  <section class="slide big">
     <svg class="deco d-corner"><use href="#i-sprout"/></svg>
     <svg class="deco d-top-right"><use href="#i-star"/></svg>
     <h2>教育理念</h2>
@@ -432,15 +475,15 @@
   </section>
 
   <!-- 10 班級經營 -->
-  <section class="slide">
+  <section class="slide big">
     <svg class="deco d-corner"><use href="#i-crown"/></svg>
     <h2>班級經營</h2>
-    <ul>
-      <li>禮貌</li>
-      <li>負責</li>
-      <li>認真誠實</li>
-      <li>勇敢</li>
-    </ul>
+    <div class="word-grid">
+      <div class="word">禮貌</div>
+      <div class="word">負責</div>
+      <div class="word">認真誠實</div>
+      <div class="word">勇敢</div>
+    </div>
     <div class="sub">鼓勵孩子成為更好的人</div>
   </section>
 
@@ -459,7 +502,7 @@
   </section>
 
   <!-- 12 班級經營 3 -->
-  <section class="slide">
+  <section class="slide big">
     <svg class="deco d-corner"><use href="#i-book"/></svg>
     <svg class="deco d-top-right"><use href="#i-ball"/></svg>
     <h2>班級經營（再續）</h2>
@@ -485,7 +528,7 @@
   </section>
 
   <!-- 14 關於閱讀 2 -->
-  <section class="slide">
+  <section class="slide big">
     <svg class="deco d-corner"><use href="#i-bulb"/></svg>
     <h2>關於閱讀（續）</h2>
     <ul>
@@ -547,7 +590,7 @@
   </section>
 
   <!-- 19 Q&A 情境 1 -->
-  <section class="slide">
+  <section class="slide qa-card">
     <svg class="deco d-corner"><use href="#i-backpack"/></svg>
     <h2>常見問題 1</h2>
     <div class="card">
@@ -557,7 +600,7 @@
   </section>
 
   <!-- 20 Q&A 情境 2 -->
-  <section class="slide">
+  <section class="slide qa-card">
     <svg class="deco d-corner"><use href="#i-pencil"/></svg>
     <h2>常見問題 2</h2>
     <div class="card">
@@ -567,7 +610,7 @@
   </section>
 
   <!-- 21 Q&A 情境 3 -->
-  <section class="slide">
+  <section class="slide qa-card">
     <svg class="deco d-corner"><use href="#i-book"/></svg>
     <h2>常見問題 3</h2>
     <div class="card">
@@ -577,7 +620,7 @@
   </section>
 
   <!-- 22 Q&A 情境 4 -->
-  <section class="slide">
+  <section class="slide qa-card">
     <svg class="deco d-corner"><use href="#i-people"/></svg>
     <h2>常見問題 4</h2>
     <div class="card">
