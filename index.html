@@ -104,8 +104,9 @@
   .calendar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1vw; }
   .month { background: #fff; border: 1px solid #e8dcc8; border-radius: 1vw; padding: 1.5vh 1vw; }
   .month h3 { font-size: 1.7vw; color: #7a6742; text-align: center; border-bottom: 1px dashed #e0d5bd; padding-bottom: 1vh; margin-bottom: 1vh; font-weight: 700; }
-  .month p { font-size: 1.2vw; line-height: 1.8; color: #6b5c48; }
+  .month p { font-size: 1.1vw; line-height: 1.8; color: #6b5c48; }
   .month .todo { color: #c0b28e; font-style: italic; }
+  .month .hl2 { color: #c86f85; font-weight: bold; }
 
   /* 卡牌 */
   .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5vw; }
@@ -428,13 +429,13 @@
     <svg class="deco d-corner"><use href="#i-cal"/></svg>
     <h2>學校重要行事</h2>
     <div class="calendar">
-      <div class="month"><h3>9 月</h3><p class="todo">（待填）</p></div>
-      <div class="month"><h3>10 月</h3><p class="todo">（待填）</p></div>
-      <div class="month"><h3>11 月</h3><p class="todo">（待填）</p></div>
-      <div class="month"><h3>12 月</h3><p class="todo">（待填）</p></div>
-      <div class="month"><h3>1 月</h3><p class="todo">（待填）</p></div>
+      <div class="month"><h3>9 月</h3><p><span class="hl2">9/25 中秋節放假</span><br><span class="hl2">9/28 教師節放假</span></p></div>
+      <div class="month"><h3>10 月</h3><p>10/9 國慶補假<br>10/10 國慶放假<br><span class="hl2">10/15 親職講座（晚）</span><br>10/25 光復節放假<br>10/26 光復節補假</p></div>
+      <div class="month"><h3>11 月</h3><p><span class="hl2">11/5-11/6 第一次定期評量</span></p></div>
+      <div class="month"><h3>12 月</h3><p><span class="hl2">12/5 校慶</span><br><span class="hl2">12/7 校慶補假</span><br>12/25 行憲紀念日放假</p></div>
+      <div class="month"><h3>1 月</h3><p>1/1 開國紀念日放假<br><span class="hl2">1/12-1/13 第二次定期評量</span><br><span class="hl2">1/20 休業式</span><br>1/21 寒假開始</p></div>
     </div>
-    <div class="sub blank">※ 拿到學校行事曆後填入各月日期</div>
+    <div class="sub blank">※ 依 115 學年度學校行事曆，如有異動以學校公告為準</div>
   </section>
 
   <!-- 6 關於301 -->
@@ -580,7 +581,7 @@
       <li>重視多元智能發展，從生活細節去要求，考試才能更加細心</li>
     </ul>
     <div class="sub"><span class="highlight">作業規定：</span>作業確實抄在聯絡簿，按時完成繳交</div>
-    <div class="sub"><span class="highlight">考試安排：</span>定期評量＿次／學期（＿月、＿月）</div>
+    <div class="sub"><span class="highlight">考試安排：</span>定期評量 2 次／學期（11 月、1 月）</div>
     <div class="sub">學習評量方式：定期評量 50% ＋ 平時成績 50%</div>
     <div class="stat">
       <div class="box"><div class="num">35%</div><div class="lbl">作業</div></div>
