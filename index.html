@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>三年級班親會簡報</title>
+<title>三年一班班親會簡報</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { height: 100%; }
   body {
     font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
-    background: #eef5ee;
+    background: #f3efe6;
     overflow: hidden;
   }
   .deck { height: 100vh; position: relative; }
@@ -19,190 +19,597 @@
     padding: 7vh 8vw;
     flex-direction: column;
     justify-content: center;
-    background: #ffffff;
-    color: #2d3a2d;
+    background: #fbf7ee;
+    color: #5a4a3a;
   }
   .slide.active { display: flex; animation: fade 0.4s ease; }
   @keyframes fade { from { opacity: 0.2; } to { opacity: 1; } }
 
-  /* 封面 */
-  .cover { background: linear-gradient(160deg, #3a6b47, #5e9b6e); color: #fff; text-align: center; }
-  .cover .school { font-size: 2.2vw; letter-spacing: 0.5em; opacity: 0.9; }
-  .cover h1 { font-size: 6vw; margin: 3vh 0 1vh; letter-spacing: 0.15em; }
-  .cover .grade { font-size: 2.6vw; margin-bottom: 6vh; opacity: 0.95; }
-  .cover .info { font-size: 1.6vw; line-height: 2; opacity: 0.9; }
+  .deco { position: absolute; opacity: 0.85; pointer-events: none; }
 
-  /* 標題 */
+  /* ===== 封面 ===== */
+  .cover { text-align: center; overflow: hidden; }
+  .cover .school { font-size: 2vw; letter-spacing: 0.6em; color: #a08c6a; }
+  .cover h1 { font-size: 7vw; letter-spacing: 0.25em; margin: 3vh 0 2vh; font-weight: normal; color: #5a4a3a; }
+  .cover .grade { font-size: 2.4vw; letter-spacing: 0.3em; color: #8a7555; margin-bottom: 6vh; }
+  .cover .info { font-size: 1.6vw; line-height: 2.2; color: #8a7555; }
+  .cover .d-flower { top: -3vw; right: -2vw; width: 16vw; }
+  .cover .d-sun { bottom: -4vw; left: -3vw; width: 14vw; }
+  .cover .d-rainbow { bottom: -1vw; right: -1vw; width: 18vw; opacity: 0.6; }
+  .cover .d-star1 { top: 14%; left: 10%; width: 4vw; opacity: 0.5; }
+  .cover .d-star2 { top: 22%; right: 12%; width: 3vw; opacity: 0.5; }
+
+  /* ===== 內頁通用 ===== */
   .slide h2 {
-    font-size: 4vw;
-    color: #3a6b47;
-    border-bottom: 0.4vw solid #cfe3d2;
-    padding-bottom: 1.5vh;
+    font-size: 3.2vw;
+    color: #7a6742;
+    border-left: 0.6vw solid #c9b98f;
+    padding-left: 1.2vw;
     margin-bottom: 5vh;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
   }
   .slide ul { list-style: none; }
   .slide li {
-    font-size: 2.2vw;
-    line-height: 1.9;
-    padding-left: 3vw;
+    font-size: 2vw;
+    line-height: 1.85;
+    padding-left: 2.6vw;
     position: relative;
-    margin-bottom: 1.5vh;
+    margin-bottom: 1.6vh;
   }
-  .slide li::before { content: "●"; color: #7cb489; position: absolute; left: 0; font-size: 1.6vw; top: 0.6vw; }
-  .slide .sub { color: #6b7a6b; font-size: 1.7vw; padding-left: 3vw; margin-bottom: 2vh; }
-  .slide .blank { color: #94a394; font-style: italic; }
+  .slide li::before { content: "◆"; color: #b9a87c; position: absolute; left: 0; font-size: 1.1vw; top: 0.9vw; }
+  .slide .sub { color: #8a8a76; font-size: 1.5vw; padding-left: 2.6vw; margin-top: 1vh; }
+  .slide .blank { color: #b5ab8e; font-style: italic; }
+  .slide .highlight { color: #c86f85; font-weight: bold; }
+  .d-corner { bottom: 2vw; right: 2.5vw; width: 8vw; opacity: 0.7; }
+  .d-corner-left { bottom: 2vw; left: 2.5vw; width: 7vw; opacity: 0.55; }
+  .d-top-right { top: 2vw; right: 2.5vw; width: 6vw; opacity: 0.6; }
+
+  /* 兩欄（自我介紹） */
+  .two-col { display: flex; gap: 4vw; }
+  .two-col .col { flex: 1; }
+  .col h3 { font-size: 1.9vw; color: #7a6742; margin-bottom: 2vh; }
+  .col p { font-size: 1.5vw; line-height: 1.9; color: #5a4a3a; }
+
+  /* 行事曆月份 */
+  .calendar { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1vw; }
+  .month { background: #fff; border: 1px solid #e8dcc8; border-radius: 1vw; padding: 1.5vh 1vw; }
+  .month h3 { font-size: 1.6vw; color: #7a6742; text-align: center; border-bottom: 1px dashed #e0d5bd; padding-bottom: 1vh; margin-bottom: 1vh; }
+  .month p { font-size: 1.1vw; line-height: 1.8; color: #6b5c48; }
+  .month .todo { color: #c0b28e; font-style: italic; }
+
+  /* 卡牌 */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5vw; }
+  .card { background: #fff; border: 1px solid #e8dcc8; border-radius: 1.2vw; padding: 2.5vh 2vw; }
+  .card h3 { font-size: 1.8vw; color: #7a6742; margin-bottom: 1.5vh; }
+  .card p { font-size: 1.4vw; line-height: 1.8; color: #6b5c48; }
+  .card .big { font-size: 2.6vw; color: #c86f85; font-weight: bold; }
+
+  /* 統計數字 */
+  .stat { display: flex; gap: 2vw; margin-top: 1vh; }
+  .stat .box { flex: 1; background: #fff; border-radius: 1vw; border: 1px solid #e8dcc8; text-align: center; padding: 2vh 1vw; }
+  .stat .box .num { font-size: 3vw; color: #c86f85; font-weight: bold; }
+  .stat .box .lbl { font-size: 1.3vw; color: #8a7555; margin-top: 0.5vh; }
 
   /* 空白範本 */
   .template-box {
-    border: 0.25vw dashed #a9c7ae;
+    border: 0.25vw dashed #c9b98f;
     border-radius: 1.5vw;
     padding: 4vh 3vw;
-    margin-bottom: 3vh;
-    background: #fafcf8;
-  }
-  .template-box .t-label { color: #3a6b47; font-weight: bold; font-size: 2vw; margin-bottom: 1vh; }
-  .template-box .t-line {
-    height: 3vh;
-    border-bottom: 0.15vw solid #cfded1;
+    background: #fffdf8;
     margin-bottom: 2vh;
   }
+  .template-box .t-label { color: #b5ab8e; font-style: italic; font-size: 1.8vw; margin-bottom: 1.5vh; }
+  .template-box .t-line { height: 3vh; border-bottom: 0.15vw solid #e8dcc8; margin-bottom: 2vh; }
 
-  /* 結尾 */
-  .end { background: linear-gradient(160deg, #3a6b47, #5e9b6e); color: #fff; text-align: center; }
-  .end h2 { color: #fff; border-color: rgba(255,255,255,0.4); font-size: 4.5vw; }
-  .end p { font-size: 2vw; line-height: 2.2; }
+  /* 大型問號 */
+  .qa { text-align: center; }
+  .qa .q { font-size: 6vw; color: #c9b98f; margin-bottom: 3vh; }
+  .qa p { font-size: 2.4vw; color: #5a4a3a; }
+
+  /* 感謝頁 */
+  .end { text-align: center; }
+  .end h2 { border: none; font-size: 4.2vw; color: #5a4a3a; }
+  .end p { font-size: 1.9vw; line-height: 2.2; color: #8a7555; }
+  .end .d-heart { top: -2vw; right: -2vw; width: 14vw; opacity: 0.6; }
+  .end .d-flower-end { bottom: -3vw; left: -2vw; width: 13vw; }
 
   /* 導航 */
   .nav {
-    position: fixed; bottom: 3vh; right: 3vw;
+    position: fixed; bottom: 2.5vh; right: 2.5vw;
     display: flex; gap: 1vw; z-index: 10;
   }
   .nav button {
-    font-size: 1.6vw;
-    padding: 0.8vh 1.4vw;
+    font-size: 1.4vw;
+    padding: 1vh 1.4vw;
     border: none; border-radius: 0.6vw;
-    background: #3a6b47; color: #fff; cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    background: #a08c6a; color: #fff; cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    font-family: inherit;
   }
-  .nav button:disabled { background: #b9cbbd; cursor: default; }
+  .nav button:disabled { background: #d8ceb8; cursor: default; }
   .page-indicator {
-    position: fixed; bottom: 3.5vh; left: 3vw;
-    font-size: 1.4vw; color: #6b7a6b; z-index: 10;
+    position: fixed; bottom: 3vh; left: 2.5vw;
+    font-size: 1.2vw; color: #8a8a76; z-index: 10;
     background: rgba(255,255,255,0.85);
-    padding: 0.4vh 1vw; border-radius: 1vw;
+    padding: 0.6vh 1vw; border-radius: 1vw;
+    border: 1px solid #e8dcc8;
   }
   .hint {
-    position: fixed; bottom: 3vh; left: 50%; transform: translateX(-50%);
-    font-size: 1.2vw; color: #94a394; z-index: 10;
+    position: fixed; bottom: 2.5vh; left: 50%; transform: translateX(-50%);
+    font-size: 1vw; color: #b5ab8e; z-index: 10;
   }
 </style>
 </head>
 <body>
+
+<!-- ===== 插圖庫（SVG symbols）===== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-flower" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="12" fill="#f6c453"/>
+    <ellipse cx="50" cy="22" rx="10" ry="16" fill="#f2a0a0"/>
+    <ellipse cx="78" cy="50" rx="10" ry="16" fill="#e88fa7" transform="rotate(72 50 50)"/>
+    <ellipse cx="50" cy="78" rx="10" ry="16" fill="#f2a0a0" transform="rotate(144 50 50)"/>
+    <ellipse cx="22" cy="50" rx="10" ry="16" fill="#e88fa7" transform="rotate(216 50 50)"/>
+    <ellipse cx="36" cy="22" rx="10" ry="16" fill="#f2a0a0" transform="rotate(288 50 50)"/>
+    <path d="M50 62 Q30 80 12 90" stroke="#7aa874" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M38 76 Q20 72 12 62" stroke="#7aa874" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-sun" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="20" fill="#f6c453"/>
+    <g stroke="#f6c453" stroke-width="6" stroke-linecap="round">
+      <line x1="50" y1="6" x2="50" y2="18"/><line x1="50" y1="82" x2="50" y2="94"/>
+      <line x1="6" y1="50" x2="18" y2="50"/><line x1="82" y1="50" x2="94" y2="50"/>
+      <line x1="19" y1="19" x2="27" y2="27"/><line x1="73" y1="73" x2="81" y2="81"/>
+      <line x1="81" y1="19" x2="73" y2="27"/><line x1="27" y1="73" x2="19" y2="81"/>
+    </g>
+    <circle cx="42" cy="45" r="4" fill="#fff"/><circle cx="58" cy="45" r="4" fill="#fff"/>
+    <path d="M42 58 Q50 66 58 58" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-rainbow" viewBox="0 0 150 60">
+    <path d="M15 60 a60 60 0 0 1 120 0" stroke="#e88fa7" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M28 60 a47 47 0 0 1 94 0" stroke="#f6c453" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M41 60 a34 34 0 0 1 68 0" stroke="#7aa874" stroke-width="8" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 100 100">
+    <path d="M50 5 L61 39 L97 39 L68 60 L79 95 L50 73 L21 95 L32 60 L3 39 L39 39 Z" fill="#f6c453"/>
+  </symbol>
+  <symbol id="i-cloud" viewBox="0 0 120 70">
+    <path d="M35 60 a25 25 0 0 1 8-49 30 30 0 0 1 55 5 22 22 0 0 1 15 44 Z" fill="#e8e0cc"/>
+  </symbol>
+  <symbol id="i-book" viewBox="0 0 100 100">
+    <path d="M18 20 Q50 12 82 20 L82 82 Q50 74 18 82 Z" fill="#f2a0a0" opacity="0.85"/>
+    <path d="M18 20 L18 82" stroke="#c86f85" stroke-width="3"/>
+    <path d="M82 20 L82 82" stroke="#7aa874" stroke-width="3"/>
+    <path d="M30 30 Q50 26 70 30" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M30 42 Q50 38 70 42" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-pencil" viewBox="0 0 100 100">
+    <rect x="30" y="10" width="40" height="58" rx="4" fill="#f6c453"/>
+    <path d="M42 68 L50 95 L58 68 Z" fill="#e8a76b"/>
+    <path d="M50 80 L50 95" stroke="#a08c6a" stroke-width="3"/>
+    <rect x="36" y="18" width="28" height="6" rx="3" fill="#e88fa7"/>
+  </symbol>
+  <symbol id="i-clock" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="38" fill="#fffdf8" stroke="#a08c6a" stroke-width="5"/>
+    <line x1="50" y1="50" x2="50" y2="26" stroke="#5a4a3a" stroke-width="4" stroke-linecap="round"/>
+    <line x1="50" y1="50" x2="66" y2="58" stroke="#c86f85" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="50" cy="50" r="4" fill="#a08c6a"/>
+  </symbol>
+  <symbol id="i-chat" viewBox="0 0 110 100">
+    <rect x="6" y="14" width="98" height="56" rx="18" fill="#fff" stroke="#a08c6a" stroke-width="4"/>
+    <path d="M28 70 L22 92 L48 70 Z" fill="#fff" stroke="#a08c6a" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="34" cy="42" r="4" fill="#b9a87c"/><circle cx="50" cy="42" r="4" fill="#b9a87c"/><circle cx="66" cy="42" r="4" fill="#b9a87c"/>
+  </symbol>
+  <symbol id="i-envelope" viewBox="0 0 100 80">
+    <rect x="8" y="12" width="84" height="56" rx="6" fill="#fff" stroke="#a08c6a" stroke-width="4"/>
+    <path d="M12 18 L50 44 L88 18" stroke="#c86f85" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-phone" viewBox="0 0 60 100">
+    <rect x="8" y="2" width="44" height="96" rx="10" fill="#fff" stroke="#a08c6a" stroke-width="4"/>
+    <rect x="16" y="12" width="28" height="44" rx="4" fill="#e8e0cc"/>
+    <line x1="24" y1="66" x2="36" y2="66" stroke="#a08c6a" stroke-width="3"/>
+    <circle cx="30" cy="78" r="4" fill="#c86f85"/>
+  </symbol>
+  <symbol id="i-medal" viewBox="0 0 100 100">
+    <circle cx="50" cy="58" r="26" fill="#f6c453" stroke="#e8b93f" stroke-width="3"/>
+    <circle cx="50" cy="58" r="16" fill="#fff"/>
+    <path d="M50 50 L54 62 L50 58 L46 62 Z" fill="#e8b93f"/>
+    <rect x="22" y="14" width="8" height="30" rx="3" fill="#a08c6a"/>
+    <rect x="70" y="14" width="8" height="30" rx="3" fill="#a08c6a"/>
+    <path d="M26 40 Q26 22 26 14" stroke="#a08c6a" stroke-width="6" fill="none"/>
+    <path d="M74 40 Q74 22 74 14" stroke="#a08c6a" stroke-width="6" fill="none"/>
+  </symbol>
+  <symbol id="i-heart" viewBox="0 0 100 100">
+    <path d="M50 88 C30 74 8 58 8 38 A22 22 0 0 1 50 26 A22 22 0 0 1 92 38 C92 58 70 74 50 88 Z" fill="#f2a0a0"/>
+  </symbol>
+  <symbol id="i-sprout" viewBox="0 0 100 100">
+    <path d="M50 96 Q50 60 50 44" stroke="#7aa874" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M50 52 Q30 44 24 28 Q40 26 50 38" fill="#7aa874"/>
+    <path d="M50 60 Q70 52 76 34 Q58 30 50 46" fill="#a8c89a"/>
+  </symbol>
+  <symbol id="i-cal" viewBox="0 0 100 100">
+    <rect x="10" y="16" width="80" height="72" rx="8" fill="#fff" stroke="#a08c6a" stroke-width="4"/>
+    <rect x="10" y="16" width="80" height="18" rx="8" fill="#e88fa7"/>
+    <rect x="18" y="6" width="8" height="16" rx="3" fill="#a08c6a"/>
+    <rect x="74" y="6" width="8" height="16" rx="3" fill="#a08c6a"/>
+    <line x1="24" y1="48" x2="76" y2="48" stroke="#e8dcc8" stroke-width="3"/>
+    <line x1="24" y1="62" x2="76" y2="62" stroke="#e8dcc8" stroke-width="3"/>
+    <line x1="24" y1="76" x2="60" y2="76" stroke="#e8dcc8" stroke-width="3"/>
+  </symbol>
+  <symbol id="i-trophy" viewBox="0 0 100 100">
+    <path d="M32 14 h36 v10 a18 18 0 0 1 -36 0 Z" fill="#f6c453" stroke="#e8b93f" stroke-width="3"/>
+    <path d="M32 20 a18 18 0 0 1 -10 -8" stroke="#e8b93f" stroke-width="5" fill="none"/>
+    <path d="M68 20 a18 18 0 0 0 10 -8" stroke="#e8b93f" stroke-width="5" fill="none"/>
+    <rect x="34" y="36" width="32" height="8" rx="2" fill="#f6c453"/>
+    <path d="M42 44 L50 74 L58 44 Z" fill="#a08c6a"/>
+    <rect x="42" y="76" width="16" height="10" rx="2" fill="#a08c6a"/>
+  </symbol>
+  <symbol id="i-q" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="42" fill="#fff" stroke="#c9b98f" stroke-width="6"/>
+    <path d="M40 34 A12 12 0 0 1 60 34 Q60 44 50 48 L50 60" stroke="#c9b98f" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <circle cx="50" cy="74" r="6" fill="#c9b98f"/>
+  </symbol>
+  <symbol id="i-ball" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="38" fill="#e88fa7"/>
+    <path d="M50 12 a38 38 0 0 1 38 38" stroke="#fff" stroke-width="5" fill="none"/>
+    <path d="M12 50 a38 38 0 0 1 76 0" stroke="#fff" stroke-width="5" fill="none"/>
+    <path d="M20 30 a38 38 0 0 1 60 40" stroke="#fff" stroke-width="5" fill="none"/>
+  </symbol>
+  <symbol id="i-people" viewBox="0 0 120 100">
+    <circle cx="40" cy="30" r="14" fill="#f2a0a0"/>
+    <path d="M12 88 Q12 62 40 62 Q68 62 68 88 Z" fill="#f2a0a0"/>
+    <circle cx="82" cy="36" r="12" fill="#a8c89a"/>
+    <path d="M60 88 Q60 66 82 66 Q104 66 104 88 Z" fill="#a8c89a"/>
+  </symbol>
+  <symbol id="i-recorder" viewBox="0 0 130 60">
+    <rect x="6" y="26" width="112" height="12" rx="6" fill="#f2a0a0" stroke="#c86f85" stroke-width="2"/>
+    <rect x="94" y="16" width="10" height="32" rx="5" fill="#f6c453"/>
+    <circle cx="28" cy="32" r="4" fill="#fff"/>
+    <circle cx="48" cy="32" r="4" fill="#fff"/>
+    <circle cx="68" cy="32" r="4" fill="#fff"/>
+    <rect x="118" y="28" width="8" height="8" rx="2" fill="#a08c6a"/>
+  </symbol>
+  <symbol id="i-paper" viewBox="0 0 80 100">
+    <path d="M14 4 L66 4 L66 96 L14 96 Z" fill="#fff" stroke="#a08c6a" stroke-width="4"/>
+    <path d="M66 4 L76 14 L76 96 L66 96 Z" fill="#f6c453"/>
+    <line x1="26" y1="28" x2="56" y2="28" stroke="#e88fa7" stroke-width="4"/>
+    <line x1="26" y1="44" x2="56" y2="44" stroke="#e8dcc8" stroke-width="4"/>
+    <line x1="26" y1="60" x2="56" y2="60" stroke="#e8dcc8" stroke-width="4"/>
+    <path d="M26 78 h18" stroke="#7aa874" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-backpack" viewBox="0 0 100 100">
+    <rect x="14" y="30" width="72" height="62" rx="14" fill="#e88fa7"/>
+    <rect x="30" y="22" width="40" height="18" rx="8" fill="#c86f85"/>
+    <rect x="40" y="44" width="20" height="20" rx="6" fill="#f6c453"/>
+    <rect x="14" y="30" width="72" height="10" rx="5" fill="#f2a0a0"/>
+  </symbol>
+  <symbol id="i-bulb" viewBox="0 0 100 100">
+    <circle cx="50" cy="38" r="24" fill="#f6c453"/>
+    <path d="M36 56 Q36 72 50 78 Q64 72 64 56" fill="#f6c453"/>
+    <rect x="44" y="82" width="12" height="8" rx="3" fill="#a08c6a"/>
+    <path d="M40 50 L60 50" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-crown" viewBox="0 0 120 90">
+    <path d="M14 22 L34 46 L60 16 L86 46 L106 22 L96 76 L24 76 Z" fill="#f6c453" stroke="#e8b93f" stroke-width="3"/>
+    <circle cx="60" cy="30" r="6" fill="#c86f85"/>
+    <circle cx="34" cy="34" r="5" fill="#e88fa7"/>
+    <circle cx="86" cy="34" r="5" fill="#e88fa7"/>
+  </symbol>
+  <symbol id="i-hand" viewBox="0 0 100 100">
+    <path d="M46 58 L34 30 A12 12 0 0 1 52 24 L52 48 L58 22 A12 12 0 0 1 78 26 L66 44 L78 34 A12 12 0 0 1 94 46 L82 72 Q76 84 62 84 L40 84 Q28 84 26 74 Z" fill="#f2a0a0" stroke="#e88fa7" stroke-width="3" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="i-globe" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="38" fill="#a8c89a" stroke="#7aa874" stroke-width="4"/>
+    <path d="M50 12 a38 38 0 0 1 0 76 a38 38 0 0 1 0 -76" stroke="#7aa874" stroke-width="3" fill="none"/>
+    <path d="M12 50 h76" stroke="#7aa874" stroke-width="3"/>
+    <path d="M20 30 q30 10 30 40" stroke="#7aa874" stroke-width="3" fill="none"/>
+  </symbol>
+</svg>
+
 <div class="deck" id="deck">
 
+  <!-- 1 封面 -->
   <section class="slide cover active">
+    <svg class="deco d-flower"><use href="#i-flower"/></svg>
+    <svg class="deco d-sun"><use href="#i-sun"/></svg>
+    <svg class="deco d-rainbow"><use href="#i-rainbow"/></svg>
+    <svg class="deco d-star1"><use href="#i-star"/></svg>
+    <svg class="deco d-star2"><use href="#i-star"/></svg>
     <div class="school">廍子國民小學</div>
     <h1>班 親 會</h1>
-    <div class="grade">三年＿＿班　家長座談會</div>
-    <div class="info">導師：＿＿＿＿＿＿　<br>中華民國＿＿＿＿年＿＿月＿＿日</div>
+    <div class="grade">三年一班 親師座談會</div>
+    <div class="info">導師：王瓊滿<br>中華民國＿＿學年度 ＿＿月＿＿日</div>
   </section>
 
+  <!-- 2 流程 -->
   <section class="slide">
-    <h2>今日議程</h2>
+    <svg class="deco d-corner"><use href="#i-book"/></svg>
+    <h2>班親會流程</h2>
     <ul>
-      <li>班級經營理念</li>
-      <li>本學期課程重點</li>
-      <li>班級事務說明</li>
-      <li>需要家長配合事項</li>
-      <li>親師交流時間</li>
+      <li>自我介紹</li>
+      <li>學校重要行事</li>
+      <li>親師溝通</li>
+      <li>班級經營</li>
+      <li>課程相關</li>
+      <li>考試相關</li>
+      <li>Q&amp;A 交流時間</li>
     </ul>
   </section>
 
+  <!-- 3 自我介紹 -->
   <section class="slide">
-    <h2>班級經營理念</h2>
-    <ul>
-      <li>培養孩子 自律、負責、尊重他人</li>
-      <li>引導孩子 樂於學習、敢於發問</li>
-      <li>鼓勵孩子 團體合作、互相幫助</li>
-      <li>重視 品格教育，品德優先於成績</li>
-    </ul>
-    <div class="sub blank">（可依各班特色補充）</div>
-  </section>
-
-  <section class="slide">
-    <h2>本學期課程重點</h2>
-    <ul>
-      <li>國語：＿＿＿＿＿＿＿＿＿＿＿＿</li>
-      <li>數學：＿＿＿＿＿＿＿＿＿＿＿＿</li>
-      <li>自然：＿＿＿＿＿＿＿＿＿＿＿＿</li>
-      <li>社會：＿＿＿＿＿＿＿＿＿＿＿＿</li>
-      <li>英語：＿＿＿＿＿＿＿＿＿＿＿＿</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <h2>班級事務說明</h2>
-    <ul>
-      <li>上放學時間：上午＿＿＿　下午＿＿＿</li>
-      <li>午餐：＿＿＿＿＿＿＿＿＿＿＿＿</li>
-      <li>制服／運動服：＿＿＿＿＿＿＿＿</li>
-      <li>聯絡簿與作業：＿＿＿＿＿＿＿＿</li>
-      <li>請假／接送聯繫：＿＿＿＿＿＿＿</li>
-    </ul>
-  </section>
-
-  <section class="slide">
-    <h2>需要家長配合事項</h2>
-    <ul>
-      <li>每日簽閱聯絡簿，陪伴孩子寫作業</li>
-      <li>協助孩子養成閱讀與早睡早起習慣</li>
-      <li>控制 3C 使用時間，以身作則</li>
-      <li>主動與老師保持聯繫、雙向溝通</li>
-    </ul>
-    <div class="sub blank">（可依需求補充）</div>
-  </section>
-
-  <section class="slide">
-    <h2>空白範本 1</h2>
-    <div class="template-box">
-      <div class="t-label">＿＿＿＿＿＿＿＿＿＿</div>
-      <div class="t-line"></div>
-      <div class="t-line"></div>
-      <div class="t-line"></div>
+    <svg class="deco d-corner"><use href="#i-people"/></svg>
+    <svg class="deco d-top-right"><use href="#i-pencil"/></svg>
+    <h2>自我介紹</h2>
+    <div class="two-col">
+      <div class="col">
+        <h3>學歷</h3>
+        <p>臺中教育大學課程與教學研究所<br>臺中師院初教系</p>
+      </div>
+      <div class="col">
+        <h3>教學經歷</h3>
+        <p>龍峰國小　導師 1 年<br>大甲國小　導師 10 年（低、高年級）<br>　　　　　行政 9 年（輔導組長、設備組長）<br>廍子國小　導師 2 年（中年級）</p>
+      </div>
     </div>
-    <div class="sub blank">（按鍵盤 → 可翻下一頁，本頁可自行修改內容）</div>
   </section>
 
+  <!-- 4 教育理念 -->
   <section class="slide">
-    <h2>空白範本 2</h2>
+    <svg class="deco d-corner"><use href="#i-sprout"/></svg>
+    <svg class="deco d-top-right"><use href="#i-star"/></svg>
+    <h2>教育理念</h2>
+    <ul>
+      <li>培養自主負責的學習態度</li>
+      <li>重視良好品格與人際互動</li>
+      <li>多元探索，看見每個人的亮點</li>
+      <li><span class="highlight">1.01 法則</span>，每天進步一點點，成為更好的自己</li>
+    </ul>
+  </section>
+
+  <!-- 5 學校重要行事 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-cal"/></svg>
+    <h2>學校重要行事</h2>
+    <div class="calendar">
+      <div class="month"><h3>9 月</h3><p class="todo">（待填）</p></div>
+      <div class="month"><h3>10 月</h3><p class="todo">（待填）</p></div>
+      <div class="month"><h3>11 月</h3><p class="todo">（待填）</p></div>
+      <div class="month"><h3>12 月</h3><p class="todo">（待填）</p></div>
+      <div class="month"><h3>1 月</h3><p class="todo">（待填）</p></div>
+    </div>
+    <div class="sub blank">※ 拿到學校行事曆後填入各月日期</div>
+  </section>
+
+  <!-- 6 關於301 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-people"/></svg>
+    <h2>關於 301</h2>
     <div class="template-box">
-      <div class="t-label">＿＿＿＿＿＿＿＿＿＿</div>
+      <div class="t-label">（空白範本，可自行填寫班級觀察）</div>
+      <div class="t-line"></div>
       <div class="t-line"></div>
       <div class="t-line"></div>
       <div class="t-line"></div>
     </div>
   </section>
 
+  <!-- 7 親師溝通 -->
   <section class="slide">
-    <h2>空白範本 3</h2>
-    <div class="template-box">
-      <div class="t-label">＿＿＿＿＿＿＿＿＿＿</div>
-      <div class="t-line"></div>
-      <div class="t-line"></div>
-      <div class="t-line"></div>
+    <svg class="deco d-corner"><use href="#i-chat"/></svg>
+    <svg class="deco d-top-right"><use href="#i-phone"/></svg>
+    <h2>親師溝通</h2>
+    <ul>
+      <li>LINE（個人及官方 LINE）</li>
+      <li>若不緊急的訊息，不妨善用<span class="highlight">聯絡簿的正向溝通</span></li>
+      <li>廍子國小 301 親師交流園地</li>
+      <li>個別晤談（事先約時間）</li>
+      <li>聯繫時間盡量於晚上 9:30 前</li>
+    </ul>
+  </section>
+
+  <!-- 8 親師溝通 2 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-clock"/></svg>
+    <h2>親師溝通（續）</h2>
+    <ul>
+      <li>培養孩子準時到校的好習慣（約 7:30－7:50）</li>
+      <li><span class="highlight">請假程序：</span>孩子未能到校，請家長最慢於當日早上 8:30 前向導師請假</li>
+      <li>事假請提前一日告知；若請假連續 2 天以上，需填寫「午餐退費申請單」才能辦理退費</li>
+      <li>孩子需晚到、早退或請假，請家長主動傳訊息告知，減少誤會與擔憂</li>
+    </ul>
+  </section>
+
+  <!-- 9 親師溝通 3 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-envelope"/></svg>
+    <h2>親師溝通（再續）</h2>
+    <ul>
+      <li>早餐請盡量在家或早餐店食用完畢</li>
+      <li>智慧型手錶容易造成上課分心，建議使用普通手錶，也可讓孩子練習看時間</li>
+      <li>若有配戴需求，請與孩子約定時間，避免上課時間使用</li>
+      <li><span class="highlight">「不做孩子的快遞郵差」</span></li>
+    </ul>
+  </section>
+
+  <!-- 10 班級經營 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-crown"/></svg>
+    <h2>班級經營</h2>
+    <ul>
+      <li>禮貌</li>
+      <li>負責</li>
+      <li>認真誠實</li>
+      <li>勇敢</li>
+    </ul>
+    <div class="sub">鼓勵孩子成為更好的人</div>
+  </section>
+
+  <!-- 11 班級經營 2 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-medal"/></svg>
+    <svg class="deco d-top-right"><use href="#i-star"/></svg>
+    <h2>班級經營（續）</h2>
+    <ul>
+      <li>榮譽制度：個人和小組加分</li>
+      <li>賦予任務：班級幹部及掃地工作</li>
+      <li>善用正向語言</li>
+      <li>容許孩子有犯錯的空間</li>
+      <li>從生活細節養成好習慣</li>
+    </ul>
+  </section>
+
+  <!-- 12 班級經營 3 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-book"/></svg>
+    <svg class="deco d-top-right"><use href="#i-ball"/></svg>
+    <h2>班級經營（再續）</h2>
+    <ul>
+      <li><span class="highlight">強化閱讀：</span>晨讀、共讀、愛閱家庭、臺中市線上閱讀認證</li>
+      <li><span class="highlight">運動健康：</span>跳繩、跑步</li>
+    </ul>
+    <div class="sub">閱讀和運動，是陪伴孩子一生的良伴</div>
+  </section>
+
+  <!-- 13 關於閱讀 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-book"/></svg>
+    <svg class="deco d-top-right"><use href="#i-bulb"/></svg>
+    <h2>關於閱讀</h2>
+    <ul>
+      <li>learn to read, read to learn</li>
+      <li>透過閱讀，培養多元觀點</li>
+      <li>中年級：閱讀萌芽階段</li>
+      <li>閱讀是輸入，寫作是輸出</li>
+      <li>喜愛閱讀的人，閱讀就是最好的獎勵</li>
+    </ul>
+  </section>
+
+  <!-- 14 關於閱讀 2 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-bulb"/></svg>
+    <h2>關於閱讀（續）</h2>
+    <ul>
+      <li>善用資源，培養孩子自學能力</li>
+      <li>班級圖書角與圖書館借閱</li>
+      <li>親子共讀時間建議</li>
+    </ul>
+    <div class="sub blank">（可補充閱讀資源資訊）</div>
+  </section>
+
+  <!-- 15 課程相關 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-globe"/></svg>
+    <svg class="deco d-top-right"><use href="#i-recorder"/></svg>
+    <h2>課程相關</h2>
+    <ul>
+      <li>學習科目增加，書包愈來愈重…</li>
+      <li>增加定期評量科目：自然、社會</li>
+      <li>音樂課開始學直笛</li>
+      <li>每週四「國際廍子」由 Teacher Temi &amp; Teacher Jack 協同教學</li>
+      <li>三年級開始寫作文（每學期 4 篇）</li>
+    </ul>
+  </section>
+
+  <!-- 16 成績計算 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-paper"/></svg>
+    <h2>成績計算</h2>
+    <ul>
+      <li>教育部明文規定，不可以公布排名，以免惡性競爭</li>
+      <li>重視多元智能發展，從生活細節去要求，考試才能更加細心</li>
+    </ul>
+    <div class="sub">學習評量方式：定期評量 50% ＋ 平時成績 50%</div>
+    <div class="stat">
+      <div class="box"><div class="num">35%</div><div class="lbl">作業</div></div>
+      <div class="box"><div class="num">35%</div><div class="lbl">小考</div></div>
+      <div class="box"><div class="num">30%</div><div class="lbl">學習態度</div></div>
     </div>
   </section>
 
+  <!-- 17 Q&A -->
+  <section class="slide qa">
+    <svg class="deco d-corner"><use href="#i-q"/></svg>
+    <h2>Q &amp; A</h2>
+    <div class="q">？</div>
+    <p>對學校或班級的建議或提問</p>
+  </section>
+
+  <!-- 18 班級家長代表 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-hand"/></svg>
+    <h2>班級家長代表</h2>
+    <ul>
+      <li>每班推派 <span class="highlight">3 位</span>班級家長代表</li>
+      <li>審核註冊費中「家長會費」（每生 100 元）的預算編列</li>
+      <li>每學期參加 1 次班級家長代表大會</li>
+      <li>不需再額外捐款</li>
+    </ul>
+  </section>
+
+  <!-- 19 Q&A 情境 1 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-backpack"/></svg>
+    <h2>常見問題 1</h2>
+    <div class="card">
+      <h3>作業沒帶回家怎麼辦？</h3>
+      <p>① 馬上回學校拿<br>② 跟同學借來印<br>③ 請家長在聯絡簿上註明，隔天到校補寫</p>
+    </div>
+  </section>
+
+  <!-- 20 Q&A 情境 2 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-pencil"/></svg>
+    <h2>常見問題 2</h2>
+    <div class="card">
+      <h3>忘記帶學用品／課本怎麼辦？</h3>
+      <p>① 跟老師或同學借<br>② 找其他替代方案<br>③ 請孩子在聯絡簿上註明，下次上課前備齊</p>
+    </div>
+  </section>
+
+  <!-- 21 Q&A 情境 3 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-book"/></svg>
+    <h2>常見問題 3</h2>
+    <div class="card">
+      <h3>孩子不愛閱讀課外書？</h3>
+      <p>① 依孩子的興趣挑選相關主題的書籍<br>② 挑選由獨立小故事組合的書籍<br>③ 挑選優質的知識型漫畫</p>
+    </div>
+  </section>
+
+  <!-- 22 Q&A 情境 4 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-people"/></svg>
+    <h2>常見問題 4</h2>
+    <div class="card">
+      <h3>孩子在學校與同學發生衝突？</h3>
+      <p>① 請孩子分別說明當時發生情況<br>② 重述孩子說的，並詢問是否有說錯<br>③ 互相道歉，並提出改善方法<br>④ 通知家長</p>
+    </div>
+  </section>
+
+  <!-- 23 親師生 -->
+  <section class="slide">
+    <svg class="deco d-corner"><use href="#i-heart"/></svg>
+    <h2>親・師・生</h2>
+    <div class="cards">
+      <div class="card"><h3>專心教學</h3><p>老師全心投入教學</p></div>
+      <div class="card"><h3>安心學習</h3><p>孩子專注快樂成長</p></div>
+      <div class="card"><h3>放心支持</h3><p>家長安心信任託付</p></div>
+      <div class="card"><h3>親師合作</h3><p>一起陪伴孩子前進</p></div>
+    </div>
+  </section>
+
+  <!-- 24 感謝頁 -->
   <section class="slide end">
-    <h2>謝謝各位家長的參與</h2>
-    <p>讓我們一起陪伴孩子，快樂學習、健康成長！</p>
-    <p style="margin-top:4vh;">導師聯絡方式<br>電話：＿＿＿＿＿＿＿＿</p>
+    <svg class="deco d-heart"><use href="#i-heart"/></svg>
+    <svg class="deco d-flower-end"><use href="#i-flower"/></svg>
+    <h2>Thank for coming</h2>
+    <p>一對一親師溝通時間</p>
+    <p style="margin-top:3vh;">謝謝各位家長的參與，讓我們一起陪伴孩子成長！</p>
   </section>
 
 </div>
 
-<div class="page-indicator" id="pageIndicator">1 / 10</div>
+<div class="page-indicator" id="pageIndicator">1 / 24</div>
 <div class="hint">← → 方向鍵或點下方按鈕翻頁</div>
 <div class="nav">
   <button id="prev" disabled>◀ 上一頁</button>
